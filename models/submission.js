@@ -9,4 +9,3 @@ var SubmissionSchema = new Schema({
 });
 
 var Submission = mongoose.model('Submission', SubmissionSchema);
-module.exports = Submission;
