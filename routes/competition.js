@@ -1,7 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
+var passport = require('passport');
+var jwt = require('express-jwt');
+var auth = jwt({
+    secret: 'SECRET',
+    userProperty: 'payload'
+});
 
+var mongoose = require('mongoose');
 var Competition = mongoose.model('Competition');
 
 router.get('/', function(req, res, next) {
@@ -86,6 +92,26 @@ router.patch('/:id', function(req, res, next) {
         }
         res.send(doc);
     });
+});
+
+router.param('id', function(req, res, next, id) {
+  Competition.findOne({'_id': id}).then(function(competition) {
+    req.competition = competition;
+    return next();
+  }, function(error) {
+    res.status(400).send(error);
+  });
+});
+
+router.post('/:id/register', auth, function(req, res, next) {
+  Competition.update(
+    {'_id': req.competition._id},
+    {$push: {live_competitions: req.payload._id}}
+  ).then(function(competition) {
+    res.send(competition);
+  }, function(error) {
+    res.status(400).send(error);
+  });
 });
 
 module.exports = router;
