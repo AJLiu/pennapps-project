@@ -8,7 +8,7 @@ var CompetitionSchema = new Schema({
     end_date: Date,
     prompt: String,
     participants: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-    submissions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Competition'}]
+    submissions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Submission'}]
 });
 
 var Competition = mongoose.model('Competition', CompetitionSchema);
