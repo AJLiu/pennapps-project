@@ -4,7 +4,7 @@
       <h2>Login</h2>
     </div>
     <div class="panel-body">
-      <form ng-submit="login()" style="margin-top:2px;">
+      <form ng-submit="logIn()" style="margin-top:2px;">
         <div class="form-group">
           <label for="email"class="col-sm-2 control-label">Email</label>
           <input type="email" class="form-control" id="email" placeholder="Email" ng-model="loginUser.email">
@@ -13,7 +13,7 @@
           <label for="password"class="col-sm-2 control-label">Password</label>
           <input type="password" class="form-control" id="password" placeholder="Password" ng-model="loginUser.password">
         </div>
-        <button type="button" class="btn btn-success">Login</button>
+        <button type="submit" class="btn btn-success">Login</button>
       </form>
     </div>
   </div>
