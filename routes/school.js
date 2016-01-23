@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     School.find(function(err, doc) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.json(doc);
     });
@@ -21,7 +21,7 @@ router.get('/:id', function(req, res, next) {
     }, function(err, doc) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.json(doc);
     });
@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
     }, function(err, doc) {
         if (err) {
             console.log(err);
-            res.send(err);
+            res.status(400).send(err);
         } else {
             res.send(doc);
         }
@@ -47,7 +47,7 @@ router.delete('/:id', function(req, res, next) {
     School.findByIdAndRemove(req.param('id'), function(err, doc) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.json(doc);
     });
@@ -63,13 +63,13 @@ router.patch('/:id', function(req, res, next) {
         update.live_competitions = req.body.live_competitions;
     if (req.body.past_competitions)
         update.past_competitions = req.body.past_competitions;
-        
+
     School.findOneAndUpdate({
         _id: req.param('id')
     }, update, function(err, doc) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.send(doc);
     });

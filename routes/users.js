@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
     User.find(function(err, users) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.json(users);
     });
@@ -22,12 +22,15 @@ router.get('/:id', function(req, res, next) {
     }, function(err, user) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.json(user);
     });
 });
 
+/**
+ * This is only for mass producing dummy users
+ */
 router.post('/', function(req, res, next) {
     User.create({
         first_name: req.body.first_name,
@@ -40,7 +43,7 @@ router.post('/', function(req, res, next) {
     }, function(err, doc) {
         if (err) {
             console.log(err);
-            res.send(err);
+            res.status(400).send(err);
         } else {
             User.setPassword(req.body.password);
             res.send(doc);
@@ -52,7 +55,7 @@ router.delete('/:id', function(req, res, next) {
     User.findByIdAndRemove(req.param('id'), function(err, doc) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.json(doc);
     });
@@ -83,7 +86,7 @@ router.patch('/:id', function(req, res, next) {
     }, update, function(err, doc) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.send(doc);
     });
