@@ -18,6 +18,7 @@ app.config([
           templateUrl: 'partials/navbar.html',
           controller: 'NavbarCtrl'
         }
+
       }
     })
 
@@ -28,6 +29,27 @@ app.config([
         'main@index': {
           templateUrl: 'partials/home.html',
           controller: 'HomeCtrl'
+        }
+      }
+    })
+
+    .state('register', {
+      parent: 'index',
+      url:'/register',
+      views: {
+        'register@index': {
+          templateUrl: 'partials/register.html',
+          controller: 'RegisterCtrl'
+        }
+      }
+    })
+    .state('login', {
+      parent: 'index',
+      url: '/login',
+      views: {
+        'login@index': {
+          templateUrl: 'partials/login.html',
+          controller: 'LoginCtrl'
         }
       }
     });
