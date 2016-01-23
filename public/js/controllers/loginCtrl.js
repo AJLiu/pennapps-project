@@ -6,7 +6,7 @@ app.controller('LoginCtrl', [
   function($scope, $rootScope, $state, auth) {
 
     $scope.logIn = function(){
-      auth.logIn($scope.loginUser).error(function(error){
+      auth.logIn($scope.user).error(function(error){
         console.log(JSON.stringify(error));
       }).then(function(){
         $state.go('home');

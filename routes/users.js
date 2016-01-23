@@ -48,18 +48,14 @@ router.post('/login', function(req, res, next) {
     }
 
     passport.authenticate('local', function(err, user, info) {
-        if (err) {
-            return next(err);
-        }
+  		if (err) { return next(err); }
 
-        if (user) {
-            return res.json({
-                token: user.generateJWT()
-            });
-        } else {
-            return res.status(401).json(info);
-        }
-    })(req, res, next);
+  		if (user) {
+  			return res.json({token: user.generateJWT()});
+  		} else {
+  			return res.status(401).json(info);
+  		}
+  	})(req, res, next);
 });
 
 /* GET users listing. */
