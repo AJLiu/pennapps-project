@@ -1,27 +1,52 @@
 <div class="container">
-  <div ng-repeat="post in list | orderBy:'title'">
-    <a href="#/posts/{{post.id}}">{{post.title}}</a>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Register
+    </div>
+    <div class="panel-body">
+      <form ng-submit="register()">
+        <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input type="text" class="form-control" id="first_name" placeholder="First Name" ng-model="firstName">
+        </div>
+        <div class="form-group">
+          <label for="last_name">Last Name</label>
+          <input type="text" class="form-control" id="last_name" placeholder="Last Name" ng-model="lastName">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Email" ng-model="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password">
+        </div>
+        <div class="form-group">
+          <label for="grade">Grade</label>
+          <input type="number" class="form-control" id="grade" placeholder="Grade" ng-model="grade">
+        </div>
+        <button type="submit" class="btn btn-default col-xs-12">Register</button>
+      </form>
+    </div>
   </div>
 
-  <form ng-submit="createPost()"
-    style="margin-top:30px;">
-    <h3>Add a new post</h3>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Login
+    </div>
+    <div class="panel-body">
+      <form ng-submit="login()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Email" ng-model="loginEmail">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="loginPassword">
+        </div>
+        <button type="submit" class="btn btn-default col-xs-12">Login</button>
+      </form>
+    </div>
+  </div>
 
-    <div class="form-group">
-      <input type="text"
-        class="form-control"
-        placeholder="Title"
-        ng-model="title"></input>
-    </div>
-    <div class="form-group">
-      <input type="text"
-        class="form-control"
-        placeholder="Content"
-        ng-model="content"></input>
-    </div>
-    <button type="submit" class="btn btn-primary">Post</button>
-  </form>
-  <button ng-click="testSort()" class="btn btn-primary">Test sort ascending</button>
-  <button ng-click="testSearch()" class="btn btn-primary">Test title search</button>
-  <button ng-click="testRest()" class="btn btn-primary">Test RESTful API</button>
 </div>
