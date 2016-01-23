@@ -4,7 +4,13 @@ app.controller('NavbarCtrl', [
   'utils',
   '$http',
   '$state',
-  function($scope, $rootScope, utils, $http, $state) {
-
+  'auth',
+  function($scope, $rootScope, utils, $http, $state, auth) {
+    $state.isLoggedIn = auth.isLoggedIn;
+    auth.currentUser().then(function(user) {
+      $scope.currentUser = user;
+    }, function(error) {
+      console.log(error);
+    });
   }
 ]);
