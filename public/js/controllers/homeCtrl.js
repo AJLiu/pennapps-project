@@ -2,33 +2,22 @@ app.controller('HomeCtrl', [
   '$scope',
   '$rootScope',
   '$state',
-  '$http',
-  function($scope, $rootScope, $state, $http) {
+  'auth',
+  function($scope, $rootScope, $state, auth) {
 
-    $scope.register = function() {
-      var data = {
-        first_name: first_name,
-        last_name: last_name,
-        email: email,
-        password: password,
-        grade: grade
-      };
-      $http.post('/register', data).then(function(response) {
-        console.log(response.data);
-      }, function(error) {
-        console.log(JSON.stringify(error.data));
+    $scope.register = function(){
+      auth.register($scope.user).error(function(error){
+        console.log(JSON.stringify(error));
+      }).then(function(){
+        //$state.go('home');
       });
     };
 
-    $scope.login = function() {
-      var data = {
-        email: loginEmail,
-        password: loginPassword
-      };
-      $http.post('/login', data).then(function(response) {
-        console.log(response.data);
-      }, function(error) {
-        console.log(JSON.stringify(error.data));
+    $scope.logIn = function(){
+      auth.logIn($scope.loginUser).error(function(error){
+        console.log(JSON.stringify(error));
+      }).then(function(){
+        //$state.go('home');
       });
     };
 

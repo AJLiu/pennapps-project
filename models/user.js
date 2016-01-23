@@ -8,8 +8,8 @@ var UserSchema = new Schema({
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     email: {type: String, required: true, unique: true},
-    hash: {type: String, required: true},
-    salt: {type: String, required: true},
+    hash: String,
+    salt: String,
     grade: {type: Number, required: true},
 
     school: {type: mongoose.Schema.Types.ObjectId, ref: 'School'},

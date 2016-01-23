@@ -7,23 +7,23 @@
       <form ng-submit="register()">
         <div class="form-group">
           <label for="first_name">First Name</label>
-          <input type="text" class="form-control" id="first_name" placeholder="First Name" ng-model="firstName">
+          <input type="text" class="form-control" id="first_name" placeholder="First Name" ng-model="user.first_name">
         </div>
         <div class="form-group">
           <label for="last_name">Last Name</label>
-          <input type="text" class="form-control" id="last_name" placeholder="Last Name" ng-model="lastName">
+          <input type="text" class="form-control" id="last_name" placeholder="Last Name" ng-model="user.last_name">
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Email" ng-model="email">
+          <input type="email" class="form-control" id="email" placeholder="Email" ng-model="user.email">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password">
+          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="user.password">
         </div>
         <div class="form-group">
           <label for="grade">Grade</label>
-          <input type="number" class="form-control" id="grade" placeholder="Grade" ng-model="grade">
+          <input type="number" class="form-control" id="grade" placeholder="Grade" ng-model="user.grade">
         </div>
         <button type="submit" class="btn btn-default col-xs-12">Register</button>
       </form>
@@ -38,11 +38,11 @@
       <form ng-submit="login()">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Email" ng-model="loginEmail">
+          <input type="email" class="form-control" id="email" placeholder="Email" ng-model="loginUser.email">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="loginPassword">
+          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="loginUser.password">
         </div>
         <button type="submit" class="btn btn-default col-xs-12">Login</button>
       </form>
