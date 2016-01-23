@@ -1,8 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
+var passport = require('passport');
+var jwt = require('express-jwt');
+var auth = jwt({
+    secret: 'SECRET',
+    userProperty: 'payload'
+});
 
+var mongoose = require('mongoose');
+var Competition = mongoose.model('Competition');
+var School = mongoose.model('School');
 var Submission = mongoose.model('Submission');
+var User = mongoose.model('User');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
