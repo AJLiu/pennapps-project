@@ -42,7 +42,9 @@ app.controller('TestCtrl', [
       });
     };
 
-    $scope.test = $scope.testRegister;
+    $scope.test1 = $scope.testCreate;
+    $scope.test2 = $scope.testRegister;
+    $scope.test3 = $scope.testWithdraw;
 
   }
 ]);
