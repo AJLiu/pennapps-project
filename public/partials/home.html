@@ -1,0 +1,27 @@
+<div class="container">
+  <div ng-repeat="post in list | orderBy:'title'">
+    <a href="#/posts/{{post.id}}">{{post.title}}</a>
+  </div>
+
+  <form ng-submit="createPost()"
+    style="margin-top:30px;">
+    <h3>Add a new post</h3>
+
+    <div class="form-group">
+      <input type="text"
+        class="form-control"
+        placeholder="Title"
+        ng-model="title"></input>
+    </div>
+    <div class="form-group">
+      <input type="text"
+        class="form-control"
+        placeholder="Content"
+        ng-model="content"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+  </form>
+  <button ng-click="testSort()" class="btn btn-primary">Test sort ascending</button>
+  <button ng-click="testSearch()" class="btn btn-primary">Test title search</button>
+  <button ng-click="testRest()" class="btn btn-primary">Test RESTful API</button>
+</div>

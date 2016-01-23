@@ -1,0 +1,20 @@
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: pointer;
+}
+
+.table-scroll-wrapper {
+  position:relative;
+}
+
+.table-scroll {
+  overflow:auto;
+}
+
+/*.row-header {
+  position:absolute;
+  z-index: 2;
+  left: -30px;
+  width: 60px;
+}*/
