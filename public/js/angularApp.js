@@ -32,7 +32,16 @@ app.config([
         }
       }
     })
-
+    .state('test', {
+      parent: 'index',
+      url: '/test',
+      views: {
+        'main@index': {
+          templateUrl: 'partials/test.html',
+          controller: 'TestCtrl'
+        }
+      }
+    })
     .state('register', {
       parent: 'index',
       url:'/register',
