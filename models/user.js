@@ -10,8 +10,8 @@ var UserSchema = new Schema({
     hash: {type: String, required: true},
     salt: {type: String, required: true},
     grade: {type: Number, required: true},
-
-    school: {type: mongoose.Schema.Types.ObjectId, ref: 'School', required: true}, // points to school
+    school: {type: mongoose.Schema.Types.ObjectId, ref: 'School'},
+    // school: {type: mongoose.Schema.Types.ObjectId, ref: 'School', required: true}, // points to school
     live_competitions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Competition'}], // points to competition
     past_competitions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Competition'}]  // points to competition
 });
