@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     Competition.find(function(err, doc) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         var date = new Date();
         for(var i in doc) {
@@ -28,7 +28,7 @@ router.get('/:id', function(req, res, next) {
     }, function(err, doc) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.json(doc);
     });
@@ -45,7 +45,7 @@ router.post('/', function(req, res, next) {
     }, function(err, doc) {
         if (err) {
             console.log(err);
-            res.send(err);
+            res.status(400).send(err);
         } else {
             res.send(doc);
         }
@@ -56,7 +56,7 @@ router.delete('/:id', function(req, res, next) {
     Competition.findByIdAndRemove(req.param('id'), function(err, doc) {
         if (err) {
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.json(doc);
     });
@@ -82,7 +82,7 @@ router.patch('/:id', function(req, res, next) {
     }, update, function(err, doc) {
         if(err){
             console.error(err);
-            res.send(err);
+            res.status(400).send(err);
         }
         res.send(doc);
     });
