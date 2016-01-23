@@ -19,7 +19,7 @@ app.controller('LoginCtrl', [
       }).then(function(){
         //$state.go('home');
         $state.go('home');
-        auth.isLoggedIn() = true;
+        
 
       });
     };
