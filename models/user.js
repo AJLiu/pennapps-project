@@ -6,10 +6,11 @@ var userSchema = new Schema({
     last_name: {type: String, required: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    school: {type: String, required: true},
     grade: {type: Number, required: true},
-    live_competitions: [String],
-    past_competitions: [String]
+
+    school: {type: Number, required: true}, // points to school
+    live_competitions: [Number], // points to competition
+    past_competitions: [Number]  // points to competition
 });
 
 var User = mongoose.model('User', userSchema);
