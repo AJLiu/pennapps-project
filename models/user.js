@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
 
 var Schema = mongoose.Schema;
 
@@ -10,6 +11,7 @@ var UserSchema = new Schema({
     hash: {type: String, required: true},
     salt: {type: String, required: true},
     grade: {type: Number, required: true},
+
     school: {type: mongoose.Schema.Types.ObjectId, ref: 'School'},
     // school: {type: mongoose.Schema.Types.ObjectId, ref: 'School', required: true}, // points to school
     live_competitions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Competition'}], // points to competition
@@ -18,7 +20,7 @@ var UserSchema = new Schema({
 
 UserSchema.methods.setPassword = function(password) {
     this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 };
 
 UserSchema.methods.validPassword = function(password) {
