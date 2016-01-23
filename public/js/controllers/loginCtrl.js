@@ -18,6 +18,9 @@ app.controller('LoginCtrl', [
         console.log(JSON.stringify(error));
       }).then(function(){
         //$state.go('home');
+        $state.go('home');
+        auth.isLoggedIn() = true;
+
       });
     };
 
