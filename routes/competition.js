@@ -9,6 +9,7 @@ var auth = jwt({
 
 var mongoose = require('mongoose');
 var Competition = mongoose.model('Competition');
+var User = mongoose.model('User');
 
 router.get('/', function(req, res, next) {
 
@@ -95,22 +96,43 @@ router.patch('/:id', function(req, res, next) {
 });
 
 router.param('id', function(req, res, next, id) {
-  Competition.findOne({'_id': id}).then(function(competition) {
-    req.competition = competition;
-    return next();
+	Competition.findOne({'_id': id}).then(function(competition) {
+		req.competition = competition;
+		return next();
+	}, function(error) {
+		res.status(400).send(error);
+	});
+});
+
+router.post('/:id/register', auth, function(req, res, next) {
+	Competition.update(
+		{'_id': req.competition._id},
+		{$push: {students: req.payload._id}}
+	).then(function() {
+		return User.update(
+      {'_id': req.payload._id},
+      {$push: {live_competitions: req.competition._id}}
+    );
+	}).then(function() {
+    res.send(req.competition);
   }, function(error) {
     res.status(400).send(error);
   });
 });
 
-router.post('/:id/register', auth, function(req, res, next) {
+router.post('/:id/withdraw', auth, function(req, res, next) {
   Competition.update(
     {'_id': req.competition._id},
-    {$push: {live_competitions: req.payload._id}}
-  ).then(function(competition) {
-    res.send(competition);
-  }, function(error) {
-    res.status(400).send(error);
+    {$pull: {students: req.payload._id}}
+  ).then(function() {
+    return User.update(
+      {'_id': req.payload._id},
+      {$pull: {live_competitions: req.competition._id}}
+    ).then(function() {
+      res.send(req.competition);
+    }, function(error) {
+      res.status(400).send(error);
+    });
   });
 });
 

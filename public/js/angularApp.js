@@ -30,6 +30,16 @@ app.config([
           controller: 'HomeCtrl'
         }
       }
+    })
+    .state('test', {
+      parent: 'index',
+      url: '/test',
+      views: {
+        'main@index': {
+          templateUrl: 'partials/test.html',
+          controller: 'TestCtrl'
+        }
+      }
     });
 
     //$locationProvider.html5Mode({ enabled: true, requireBase: false });
