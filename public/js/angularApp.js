@@ -104,31 +104,27 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
     var id = auth.currentUserId();
     if (id) {
       return $http.get('/users/'+id).then(function(response) {
-        return response.data;
+        return response.data[0];
       });
     } else {
       return Promise.reject('Not logged in');
     }
-  }
+  };
 
   auth.register = function(user){
-    console.log('register');
-    console.log(JSON.stringify(user));
     return $http.post('/users/register', user).success(function(data){
       auth.saveToken(data.token);
     });
   };
 
   auth.logIn = function(user){
-    console.log('login');
-    console.log(JSON.stringify(user));
     return $http.post('/users/login', user).success(function(data){
       auth.saveToken(data.token);
     });
   };
 
   auth.logOut = function(){
-    $window.localStorage.removeItem('flapper-news-token');
+    $window.localStorage.removeItem('pennguin-token');
   };
 
   return auth;
@@ -152,7 +148,8 @@ app.controller('IndexCtrl', [
   '$http',
   '$state',
   '$window',
-  function($scope, $rootScope, utils, $http, $state) {
-
+  'auth',
+  function($scope, $rootScope, utils, $http, $state, $window, auth) {
+    $rootScope.logOut = auth.logOut;
   }
 ]);
