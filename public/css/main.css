@@ -12,6 +12,17 @@
   overflow:auto;
 }
 
+/*label, input {
+    display: block;
+}*/
+
+/*label {
+    margin-bottom: 20px;
+}*/
+
+input {
+    margin-bottom: 20px;
+}
 /*.row-header {
   position:absolute;
   z-index: 2;
