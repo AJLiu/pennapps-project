@@ -8,6 +8,12 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var mongoose = require('mongoose');
+require('./models/school');
+require('./models/user');
+require('./models/competition');
+mongoose.connect('mongodb://localhost/db');
+
 var app = express();
 
 // view engine setup
