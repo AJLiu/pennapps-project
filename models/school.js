@@ -8,4 +8,3 @@ var SchoolSchema = new Schema({
 });
 
 var School = mongoose.model('School', SchoolSchema);
-module.exports = School;

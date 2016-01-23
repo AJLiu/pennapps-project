@@ -43,4 +43,3 @@ UserSchema.methods.generateJWT = function() {
 };
 
 var User = mongoose.model('User', UserSchema);
-module.exports = User;

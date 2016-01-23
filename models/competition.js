@@ -12,4 +12,3 @@ var CompetitionSchema = new Schema({
 });
 
 var Competition = mongoose.model('Competition', CompetitionSchema);
-module.exports = Competition;
