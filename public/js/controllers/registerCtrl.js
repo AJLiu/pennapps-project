@@ -1,4 +1,4 @@
-app.controller('RegisterC', [
+app.controller('RegisterCtrl', [
   '$scope',
   '$rootScope',
   '$state',
@@ -9,7 +9,7 @@ app.controller('RegisterC', [
       auth.register($scope.user).error(function(error){
         console.log(JSON.stringify(error));
       }).then(function(){
-        
+
       });
     };
 
