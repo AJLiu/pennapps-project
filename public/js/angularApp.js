@@ -72,7 +72,7 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
   auth.register = function(user){
     console.log('register');
     console.log(JSON.stringify(user));
-    return $http.post('/register', user).success(function(data){
+    return $http.post('/users/register', user).success(function(data){
       auth.saveToken(data.token);
     });
   };
@@ -80,7 +80,7 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
   auth.logIn = function(user){
     console.log('login');
     console.log(JSON.stringify(user));
-    return $http.post('/login', user).success(function(data){
+    return $http.post('/users/login', user).success(function(data){
       auth.saveToken(data.token);
     });
   };
