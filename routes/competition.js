@@ -11,6 +11,13 @@ router.get('/', function(req, res, next) {
             console.error(err);
             res.send(err);
         }
+        var date = new Date();
+        for(var i in doc) {
+            if(date < doc[i].start_date)
+                doc[i].prompt="Come back later"
+            else if(date > doc[i].end_date)
+                doc[i].prompt+="\nNOTE: THIS EVENT IS OVER."
+        }
         res.json(doc);
     });
 });
