@@ -91,7 +91,7 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
     }
   };
 
-  auth.currentUser = function(){
+  auth.currentUserId = function(){
     if(auth.isLoggedIn()){
       var token = auth.getToken();
       var payload = JSON.parse($window.atob(token.split('.')[1]));
@@ -99,6 +99,17 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
       return payload._id;
     }
   };
+
+  auth.currentUser = function() {
+    var id = auth.currentUserId();
+    if (id) {
+      return $http.get('/users/'+id).then(function(response) {
+        return response.data;
+      });
+    } else {
+      return Promise.reject('Not logged in');
+    }
+  }
 
   auth.register = function(user){
     console.log('register');
