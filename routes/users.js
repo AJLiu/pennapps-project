@@ -1,7 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
+var passport = require('passport');
+var jwt = require('express-jwt');
+var auth = jwt({
+    secret: 'SECRET',
+    userProperty: 'payload'
+});
 
+var mongoose = require('mongoose');
+var Competition = mongoose.model('Competition');
+var School = mongoose.model('School');
+var Submission = mongoose.model('Submission');
 var User = mongoose.model('User');
 
 router.post('/register', function(req, res, next) {
@@ -139,6 +148,31 @@ router.patch('/:id', function(req, res, next) {
         }
         res.send(doc);
     });
+});
+
+router.param('id', function(req, res, next, id) {
+	User.findOne({_id: id}).then(function(user) {
+		req.user = user;
+		return next();
+	}, function(error) {
+		res.status(400).send(error);
+	});
+});
+
+router.get('/:id/livecompetitions', function(req, res, next) {
+  Competition.find({ _id: { $in: req.user.live_competitions }}).then(function(competitions) {
+    res.send(competitions);
+  }, function(error) {
+    res.status(400).send(error);
+  });
+});
+
+router.get('/:id/pastcompetitions', function(req, res, next) {
+  Competition.find({ _id: { $in: req.user.pastcompetitions }}).then(function(competitions) {
+    res.send(competitions);
+  }, function(error) {
+    res.status(400).send(error);
+  });
 });
 
 module.exports = router;
