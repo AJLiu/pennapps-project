@@ -27,7 +27,7 @@ router.param('competitionId', function(req, res, next, id) {
 
 router.post('/generate/from/:competitionId', function(req, res, next) {
   Submission.find(
-    _id: { $in: req.competition.submissions }
+    {_id: { $in: req.competition.submissions }}
   ).then(function(submissions) {
     shuffle(submissions);
     var creates = [];
@@ -51,10 +51,10 @@ router.post('/generate/from/:competitionId', function(req, res, next) {
         var saves = [];
         for (var i=0; i<matches.length; i++) {
           var judgeIndex = i % judge.length;
-          updates.push(Judge.update({
+          updates.push(Judge.update(
             {_id: judges[judgeIndex]._id},
             {$push: {currentMatches: matches[i]._id}}
-          }));
+          ));
           judges[judgeIndex]
           matches[i].judge = judges[judgeIndex]._id;
           saves.push(matches[i].save());
@@ -84,6 +84,18 @@ router.post('/generate/from/:competitionId', function(req, res, next) {
     });
   }, function(error) {
     res.status(400).send(error);
+  });
+});
+
+router.get('/:id', function(req, res, next) {
+  Round.findOne({
+      _id: req.param('id')
+  }, function(err, doc) {
+      if (err) {
+          console.error(err);
+          res.status(400).send(err);
+      }
+      res.json(doc);
   });
 });
 
