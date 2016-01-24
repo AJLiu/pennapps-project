@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    School.find({
+    School.findOne({
         _id: req.param('id')
     }, function(err, doc) {
         if (err) {

@@ -46,7 +46,7 @@ app.config([
       parent: 'index',
       url:'/register',
       views: {
-        'register@index': {
+        'main@index': {
           templateUrl: 'partials/register.html',
           controller: 'RegisterCtrl'
         }
@@ -56,7 +56,7 @@ app.config([
       parent: 'index',
       url: '/login',
       views: {
-        'login@index': {
+        'main@index': {
           templateUrl: 'partials/login.html',
           controller: 'LoginCtrl'
         }
@@ -67,12 +67,50 @@ app.config([
       parent: 'index',
       url: '/dash',
       views: {
-        'dash@index': {
+        'main@index': {
           templateUrl: 'partials/dash.html',
           controller: 'DashCtrl'
         }
       }
-    });
+    })
+
+    .state('competition', {
+      parent: 'index',
+      url: '/competitions/{id}',
+      resolve: {
+        competition: ['$stateParams', 'auth', '$http',
+          function($stateParams, auth, $http) {
+            return $http.get('/competitions/'+$stateParams.id).then(function(response) {
+              return response.data;
+            });
+          }
+        ]
+      },
+      views: {
+        'main@index': {
+          templateUrl: '',
+          controller: 'CompetitionCtrl'
+        }
+      }
+    })
+      .state('competition.registered', {
+        url: '',
+        views: {
+          'main@index': {
+            templateUrl: 'partials/competition.registered.html',
+            controller: 'CompetitionRegisteredCtrl'
+          }
+        }
+      })
+      .state('competition.unregistered', {
+        url: '',
+        views: {
+          'main@index': {
+            templateUrl: 'partials/competition.unregistered.html',
+            controller: 'CompetitionUnregisteredCtrl'
+          }
+        }
+      });
 
     //$locationProvider.html5Mode({ enabled: true, requireBase: false });
     $urlRouterProvider.otherwise('home');
@@ -126,7 +164,7 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
     var id = auth.currentUserId();
     if (id) {
       return $http.get('/users/'+id).then(function(response) {
-        return response.data[0];
+        return response.data;
       });
     } else {
       return Promise.reject('Not logged in');
@@ -173,5 +211,25 @@ app.controller('IndexCtrl', [
   'auth',
   function($scope, $rootScope, utils, $http, $state, $window, auth) {
     $rootScope.logOut = auth.logOut;
+  }
+]);
+
+app.controller('CompetitionCtrl', [
+  '$scope',
+  '$rootScope',
+  '$state',
+  'auth',
+  '$http',
+  'competition',
+  function($scope, $rootScope, $state, auth, $http, competition) {
+    auth.currentUser().then(function(user) {
+      console.log(user.competitions);
+      console.log(competition);
+      if (user.competitions.indexOf(competition._id) > -1) {
+        $state.go('.registered');
+      } else {
+        $state.go('.unregistered');
+      }
+    });
   }
 ]);

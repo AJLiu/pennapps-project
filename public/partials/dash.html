@@ -5,21 +5,21 @@
     <div ng-show="currentCompetitions">
       <h3>Current</h3>
       <div ng-repeat="competition in currentCompetitions">
-        <p>{{competition.name}}: {{competition.prompt}}</p>
+        <a href="#/competitions/{{competition._id}}">{{competition.name}}: {{competition.prompt}}</a>
       </div>
     </div>
 
     <div ng-show="upcomingCompetitions">
       <h3>Upcoming</h3>
       <div ng-repeat="competition in upcomingCompetitions">
-        <p>{{competition.name}}</p>
+        <a href="#/competitions/{{competition._id}}">{{competition.name}}</a>
       </div>
     </div>
 
     <div ng-show="pastCompetitions">
       <h3>Past</h3>
       <div ng-repeat="competition in pastCompetitions">
-        <p>{{competition.name}}: {{competition.prompt}}</p>
+        <a href="#/competitions/{{competition._id}}">{{competition.name}}: {{competition.prompt}}</a>
       </div>
     </div>
   </div>

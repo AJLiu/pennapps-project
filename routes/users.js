@@ -71,7 +71,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    User.find({
+    User.findOne({
         _id: req.param('id')
     }, function(err, user) {
         if (err) {
