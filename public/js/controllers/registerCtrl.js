@@ -9,7 +9,7 @@ app.controller('RegisterCtrl', [
       auth.register($scope.user).error(function(error){
         console.log(JSON.stringify(error));
       }).then(function(){
-        $state.go('dash');
+        $state.go('home');
       });
     };
 
