@@ -183,11 +183,31 @@ app.controller('TestCtrl', [
 
     $scope.logOutJudge = jauth.logOut;
 
+    $scope.generateSchools = function() {
+      $http.post('/schools', {
+        school_name: 'Moscrop Secondary School',
+        students: ["56a3af43e3f0f5bc3553b492"],
+      }).then(function() {
+        return $http.post('/schools', {
+          school_name: 'Alpharetta High School',
+          students: ["56a4d3210dcc6df32bd3d58a"]
+        });
+      }).then(function() {
+        return $http.post('/schools', {
+          school_name: 'Gunn High School',
+          students: ["56a4d33e0dcc6df32bd3d58b"]
+        });
+      }).then(function() {
+        console.log('done');
+      });
+    };
+
     $scope.test1 = $scope.testCreate;
     $scope.test2 = $scope.testRegister;
     $scope.test3 = $scope.testWithdraw;
     $scope.test4 = $scope.testDelete;
     $scope.test5 = $scope.testRegisterJudge;
     $scope.test6 = $scope.logOutJudge;
+    $scope.test7 = $scope.generateSchools;
   }
 ]);

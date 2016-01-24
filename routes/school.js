@@ -40,8 +40,6 @@ router.post('/', function(req, res, next) {
     School.create({
         school_name: req.body.school_name,
         students: req.body.students,
-        live_competitions: req.body.live_competitions,
-        past_competitions: req.body.past_competitions
     }, function(err, doc) {
         if (err) {
             console.log(err);
@@ -82,6 +80,45 @@ router.patch('/:id', function(req, res, next) {
         }
         res.send(doc);
     });
+});
+
+router.get('/list/top', function(req, res, next) {
+  School.find().then(function(schools) {
+    Submission.find().then(function(submissions) {
+      var studentPromises = [];
+      for (var i=0; i<submissions.length; i++) {
+        studentPromises.push(User.findOne({_id: submissions[i].student}));
+      }
+      Promise.all(studentPromises).then(function(students) {
+        var studentSchoolPromises = [];
+        for (var i=0; i<students.length; i++) {
+          studentSchoolPromises.push(School.findOne({_id: students[i].school}));
+        }
+        Promise.all(studentSchoolPromises).then(function(studentSchools) {
+          var schoolScorePairs = schools.map(function(school) {
+            return {
+              school: school,
+              score: 0
+            };
+          });
+          for (var i=0; i<studentSchools.length; i++) {
+            for (var j=0; j<schoolScorePairs.length; j++) {
+              if (studentSchools[i]._id == schoolScorePairs[j].school._id) {
+                schoolScorePairs.score += submissions[i].rating();
+              }
+            }
+          }
+          schoolScorePairs.sort(function(a,b){
+            if(a.score == b.score){
+              return a.school.school_name > b.school.school_name ? 1 : a.school.school_name < b.school.school_name ? -1 : 0;
+            }
+            return a.score > b.score ? 1 : -1;
+          });
+          res.json(schoolScorePairs);
+        });
+      });
+    });
+  });
 });
 
 module.exports = router;

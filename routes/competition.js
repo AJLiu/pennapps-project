@@ -166,6 +166,31 @@ router.post('/:id/withdraw', auth, function(req, res, next) {
 	});
 });
 
+router.post('/:id/submit', auth, function(req, res, next) {
+	Submission.create({
+		competition: req.competition._id,
+		student: req.payload._id,
+		link: req.body.link,
+		opponentRatingSum: 0,
+		numMatches: 0,
+		numWins: 0,
+		numLosses: 0
+	}).then(function(submission) {
+		Competition.update(
+			{_id: req.competition._id},
+			{$push: { submissions: submission._id }}
+		).then(function() {
+			res.send(submission);
+		}, function(error) {
+			console.log(error);
+			res.status(400).send(error);
+		});
+	}, function(error) {
+		console.log(error);
+		res.status(400).send(error);
+	});
+});
+
 router.get('/type/current', function(req, res, next) {
 	var date = new Date();
 

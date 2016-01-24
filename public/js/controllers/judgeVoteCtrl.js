@@ -4,8 +4,18 @@ app.controller('JudgeVoteCtrl', [
 	'$state',
 	'jauth',
 	function($scope, $rootScope, $state, jauth) {
+
 		if (!jauth.isLoggedIn()) {
 			$state.go('jlogin');
 		}
+
+		$scope.voteLeft = function() {
+
+		}
+
+		$scope.voteRight = function() {
+			
+		}
+
 	}
 ]);
