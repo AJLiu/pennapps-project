@@ -1,4 +1,4 @@
-var app = angular.module('pennguinHackers', ['ui.router']);
+var app = angular.module('pennguinHackers', ['ui.router', 'smoothScroll']);
 
 app.config([
   '$stateProvider',
@@ -18,7 +18,6 @@ app.config([
           templateUrl: 'partials/navbar.html',
           controller: 'NavbarCtrl'
         }
-
       }
     })
 

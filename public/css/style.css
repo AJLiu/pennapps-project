@@ -51,12 +51,12 @@ div.heading {
         background-color: #B3E5FC;
         border-radius: 0; }
 
-div.about {
+div#about {
   position: relative;
   min-height: 50%;
   background-color: green;
   margin: 0;
   padding: 0; }
-  div.about h2 {
+  div#about h2 {
     margin: 0px;
     padding: 10px; }

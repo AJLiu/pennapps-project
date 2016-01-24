@@ -1,0 +1,22 @@
+{
+  "name": "pennapps",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/AJLiu/pennapps-project",
+  "moduleType": [
+    "es6",
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ngSmoothScroll": "~2.0.0"
+  }
+}

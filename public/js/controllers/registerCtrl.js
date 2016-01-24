@@ -3,6 +3,7 @@ app.controller('RegisterCtrl', [
   '$rootScope',
   '$state',
   'auth',
+  'scrollTo',
   function($scope, $rootScope, $state, auth) {
 
     $scope.register = function(){
