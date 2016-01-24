@@ -4,7 +4,8 @@ html {
 
 body {
   overflow: hidden;
-  font-family: 'lato', sans-serif; }
+  font-family: 'lato', sans-serif;
+  background-color: #90A4AE; }
 
 nav.navbar {
   margin: 0;
@@ -36,18 +37,24 @@ div.heading {
       font-size: 10em; }
     div.heading div.centerbox h2 {
       font-size: 2em; }
-    div.heading div.centerbox a, div.heading div.centerbox a:visited, div.heading div.centerbox a:hover, div.heading div.centerbox a:link {
+    div.heading div.centerbox a,
+    div.heading div.centerbox a:visited,
+    div.heading div.centerbox a:hover,
+    div.heading div.centerbox a:link {
       line-height: 0;
       display: inline-block;
       background-color: #29B6F6;
-      padding: 20px 20px;
+      padding: 20px;
       font-size: 1.2em;
       color: white;
       text-decoration: none;
-      -webkit-transition-duration: .5s;
-              transition-duration: .5s;
-      border-radius: .5em; }
-      div.heading div.centerbox a:hover, div.heading div.centerbox a:visited:hover, div.heading div.centerbox a:hover:hover, div.heading div.centerbox a:link:hover {
+      -webkit-transition-duration: 0.5s;
+              transition-duration: 0.5s;
+      border-radius: 0.5em; }
+      div.heading div.centerbox a:hover,
+      div.heading div.centerbox a:visited:hover,
+      div.heading div.centerbox a:hover:hover,
+      div.heading div.centerbox a:link:hover {
         background-color: #B3E5FC;
         border-radius: 0; }
 
@@ -56,7 +63,41 @@ div#about {
   min-height: 50%;
   background-color: green;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  box-shadow: 5px 5px 2px #424242; }
   div#about h2 {
-    margin: 0px;
+    margin: 0;
     padding: 10px; }
+
+div.panel#login, div.panel#register {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
+          align-items: center;
+  background-color: #e7e7e7;
+  margin: auto;
+  width: 300px;
+  box-shadow: 5px 5px 10px #889;
+  margin-top: 60px; }
+  div.panel#login .panel-heading, div.panel#register .panel-heading {
+    margin-top: 10px;
+    background-color: #e7e7e7;
+    line-height: 1em;
+    padding-bottom: 0; }
+  div.panel#login .panel-body, div.panel#register .panel-body {
+    width: 100%;
+    background-color: #e7e7e7; }
+  div.panel#login button, div.panel#register button {
+    float: right;
+    background-color: #29B6F6;
+    border-color: #29B6F6;
+    -webkit-transition-duration: .5s;
+            transition-duration: .5s; }
+    div.panel#login button:hover, div.panel#register button:hover {
+      background-color: #B3E5FC;
+      border-color: #B3E5FC;
+      border-radius: 0; }
+
+div.panel#register {
+  width: 450px; }

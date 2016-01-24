@@ -10,24 +10,21 @@ var JudgeSchema = Schema({
 	hash: String,
 	salt: String,
 
-	previousAssignment: String,
-	currentAssignment: String,
-	done: Boolean, //legacy?
-	voted: Boolean,
-	judged: [String]
+	previousMatches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Match'}],
+	currentMatches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Match'}]
 });
 
-UserSchema.methods.setPassword = function(password) {
+JudgeSchema.methods.setPassword = function(password) {
 	this.salt = crypto.randomBytes(16).toString('hex');
 	this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 };
 
-UserSchema.methods.validPassword = function(password) {
+JudgeSchema.methods.validPassword = function(password) {
 	var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 	return this.hash === hash;
 };
 
-UserSchema.methods.generateJWT = function() {
+JudgeSchema.methods.generateJWT = function() {
 
 	// set expiration to 60 days
 	var today = new Date();

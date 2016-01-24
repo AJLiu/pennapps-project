@@ -51,23 +51,6 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-    Competition.create({
-        name: req.body.name,
-        start_date: req.body.start_date,
-        end_date: req.body.end_date,
-        prompt: req.body.prompt,
-        students: req.body.students,
-        image: req.body.image,
-        submissions: req.body.submissions
-    }, function(err, doc) {
-        if (err) {
-            console.log(err);
-            res.status(400).send(err);
-        } else {
-            res.send(doc);
-        }
-    });
-
 	Competition.create({
 		name: req.body.name,
 		start_date: req.body.start_date,
