@@ -23,9 +23,9 @@ router.get('/', function(req, res, next) {
         var date = new Date();
         for(var i in doc) {
             if(date < doc[i].start_date)
-                doc[i].prompt="Come back later"
+                doc[i].prompt="Come back later";
             else if(date > doc[i].end_date)
-                doc[i].prompt+="\nNOTE: THIS EVENT IS OVER."
+                doc[i].prompt+="\nNOTE: THIS EVENT IS OVER.";
         }
         res.json(doc);
     });
@@ -39,6 +39,10 @@ router.get('/:id', function(req, res, next) {
             console.error(err);
             res.status(400).send(err);
         }
+        if(date < doc[i].start_date)
+            doc[i].prompt="Come back later";
+        else if(date > doc[i].end_date)
+            doc[i].prompt+="\nNOTE: THIS EVENT IS OVER.";
         res.json(doc);
     });
 });
@@ -113,7 +117,7 @@ router.post('/:id/register', auth, function(req, res, next) {
 	).then(function() {
 		return User.update(
       {_id: req.payload._id},
-      {$push: {live_competitions: req.competition._id}}
+      {$push: {competitions: req.competition._id}}
     );
 	}).then(function() {
     res.send(req.competition);
@@ -129,7 +133,7 @@ router.post('/:id/withdraw', auth, function(req, res, next) {
   ).then(function() {
     return User.update(
       {_id: req.payload._id},
-      {$pull: {live_competitions: req.competition._id}}
+      {$pull: {competitions: req.competition._id}}
     ).then(function() {
       res.send(req.competition);
     }, function(error) {
@@ -137,53 +141,5 @@ router.post('/:id/withdraw', auth, function(req, res, next) {
     });
   });
 });
-
-router.post('/:id/archive', auth, function(req, res, next) {
-  User.findOne({_id: req.payload._id}).then(function(user) {
-    if (user.live_competitions.indexOf(req.competition._id) > -1) {
-      User.update(
-        {_id: req.payload._id},
-        {$pull: {live_competitions: req.competition._id}}
-      ).then(function() {
-        return User.update(
-          {_id: req.payload._id},
-          {$push: {past_competitions: req.competition._id}}
-        );
-      }).then(function() {
-        res.send('done');
-      }, function(error) {
-        res.status(400).send(error);
-      });
-    } else {
-      res.status(404).send('Competition not found');
-    }
-  }, function(error) {
-    res.status(400).send(error);
-  });
-});
-
-router.post('/:id/unarchive', auth, function(req, res, next) {
-  User.findOne({_id: req.payload._id}).then(function(user) {
-    if (user.past_competitions.indexOf(req.competition._id) > -1) {
-      User.update(
-        {_id: req.payload._id},
-        {$pull: {past_competitions: req.competition._id}}
-      ).then(function() {
-        return User.update(
-          {_id: req.payload._id},
-          {$push: {live_competitions: req.competition._id}}
-        );
-      }).then(function() {
-        res.send('done');
-      }, function(error) {
-        res.status(400).send(error);
-      });
-    } else {
-      res.status(404).send('Competition not found');
-    }
-  }, function(error) {
-    res.status(400).send(error);
-  });
-})
 
 module.exports = router;

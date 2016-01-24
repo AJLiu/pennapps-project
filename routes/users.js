@@ -92,8 +92,7 @@ router.post('/', function(req, res, next) {
         email: req.body.email,
         grade: req.body.grade,
         school: req.body.school,
-        live_competitions: req.body.live_competitions,
-        past_competitions: req.body.past_competitions,
+        competitions: req.body.competitions,
     }, function(err, doc) {
         if (err) {
             console.log(err);
@@ -127,10 +126,8 @@ router.patch('/:id', function(req, res, next) {
         update.grade = req.body.grade;
     if (req.body.school)
         update.school = req.body.school;
-    if (req.body.live_competitions)
-        update.live_competitions = req.body.live_competitions;
-    if (req.body.past_competitions)
-        update.past_competitions = req.body.past_competitions;
+    if (req.body.competitions)
+        update.competitions = req.body.competitions;
 
     if(req.body.password)
         User.setPassword(req.body.password);
@@ -155,16 +152,43 @@ router.param('id', function(req, res, next, id) {
 	});
 });
 
-router.get('/:id/livecompetitions', function(req, res, next) {
-  Competition.find({ _id: { $in: req.user.live_competitions }}).then(function(competitions) {
+router.get('/:id/competitions/current', function(req, res, next) {
+  var date = new Date();
+  Competition.find({
+    _id: { $in: req.user.competitions },
+    start_date: { $lt: date },
+    end_date: { $gt: date }
+  }).then(function(competitions) {
     res.send(competitions);
   }, function(error) {
     res.status(400).send(error);
   });
 });
 
-router.get('/:id/pastcompetitions', function(req, res, next) {
-  Competition.find({ _id: { $in: req.user.past_competitions }}).then(function(competitions) {
+router.get('/:id/competitions/past', function(req, res, next) {
+  var date = new Date();
+  Competition.find({
+    _id: { $in: req.user.competitions },
+    end_date: { $lt: date }
+  }).then(function(competitions) {
+    for (var i=0; i<competitions.length; i++) {
+      competitions[i].prompt+="\nNOTE: THIS EVENT IS OVER.";
+    }
+    res.send(competitions);
+  }, function(error) {
+    res.status(400).send(error);
+  });
+});
+
+router.get('/:id/competitions/upcoming', function(req, res, next) {
+  var date = new Date();
+  Competition.find({
+    _id: { $in: req.user.competitions },
+    start_date: { $gt: date },
+  }).then(function(competitions) {
+    for (var i=0; i<competitions.length; i++) {
+      competitions[i].prompt = "Come back later";
+    }
     res.send(competitions);
   }, function(error) {
     res.status(400).send(error);
