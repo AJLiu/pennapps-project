@@ -79,6 +79,17 @@ app.config([
   }
 ]);
 
+app.run(['$rootScope', '$state', 'auth',
+  function ($rootScope, $state, auth) {
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+      if (toState.name !== 'home' && toState.name !== 'login' && toState.name !== 'register' && !auth.isLoggedIn()) {
+        event.preventDefault();
+        $state.go('login');
+      }
+    });
+  }]
+);
+
 app.factory('auth', ['$http', '$window', function($http, $window) {
   var auth = {};
 

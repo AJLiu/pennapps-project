@@ -1,0 +1,10 @@
+<div class="container">
+  <div ng-show="liveCompetitions">
+    <div ng-repeat="lc in liveCompetitions">
+      <p>{{lc.name}}: {{lc.prompt}}</p>
+    </div>
+  </div>
+  <div ng-hide="liveCompetitions">
+    <h3>Looks like you haven't signed up for any competitions :(</h3>
+  </div>
+</div>
