@@ -146,6 +146,7 @@ app.run(['$rootScope', '$state', 'auth',
       && toState.name !== 'register'
       && toState.name !== 'jlogin'
       && toState.name !== 'jvote'
+      && toState.name !== 'test'
       && !auth.isLoggedIn()) {
         event.preventDefault();
         $state.go('login');

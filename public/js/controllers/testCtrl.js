@@ -4,7 +4,8 @@ app.controller('TestCtrl', [
   '$state',
   '$http',
   'auth',
-  function($scope, $rootScope, $state, $http, auth) {
+  'jauth',
+  function($scope, $rootScope, $state, $http, auth, jauth) {
 
     $scope.testCreate = function() {
       var events = [
@@ -164,10 +165,29 @@ app.controller('TestCtrl', [
       });
     };
 
+    $scope.testRegisterJudge = function() {
+      var user = {
+        first_name: 'TestJudge',
+        last_name: 'SomeLastName',
+        email: 'test.judge@ivonliu.com',
+        password: '123467890',
+        previousMatches: [],
+        currentMatches: []
+      }
+      jauth.register(user).error(function(error){
+        console.log(JSON.stringify(error));
+      }).then(function(){
+        console.log('Created new judge');
+      });
+    }
+
+    $scope.logOutJudge = jauth.logOut;
+
     $scope.test1 = $scope.testCreate;
     $scope.test2 = $scope.testRegister;
     $scope.test3 = $scope.testWithdraw;
     $scope.test4 = $scope.testDelete;
-
+    $scope.test5 = $scope.testRegisterJudge;
+    $scope.test6 = $scope.logOutJudge;
   }
 ]);
