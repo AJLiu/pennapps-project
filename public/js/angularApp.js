@@ -61,6 +61,17 @@ app.config([
           controller: 'LoginCtrl'
         }
       }
+    })
+
+    .state('dash', {
+      parent: 'index',
+      url: '/dash',
+      views: {
+        'dash@index': {
+          templateUrl: 'partials/dash.html',
+          controller: 'DashCtrl'
+        }
+      }
     });
 
     //$locationProvider.html5Mode({ enabled: true, requireBase: false });
