@@ -1,1 +1,21 @@
-<p style="padding-top:50px">unregistered</p>
+<div class="container">
+    <h2>Unregistered Competition</h2>
+    <div class="row">
+    	<div class = "panel panel-default ">
+    		<div class = "panel-heading">
+      		<a href="#/competitions/{{competition._id}}">{{competition.name}}</a>
+      	</div>
+      	<div class = "panel-body">
+      		{{competition.prompt}}
+          <div class="center-cropped" 
+            style="background-image: url({{competition.image}});">
+            <img src="{{competition.image}}" />
+          </div>
+      		<h5><font color = "red">Ends: </font>{{competition.end_date}}<h5>
+      		<form ng-submit="redirect()" style="margin-top:2px;">
+      			<button type="submit" class="btn btn-success">Sign Up</button>
+      		</form>
+      	</div>
+      </div>
+    </div>
+</div>
