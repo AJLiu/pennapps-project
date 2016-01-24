@@ -9,7 +9,7 @@ app.controller('LoginCtrl', [
       auth.logIn($scope.user).error(function(error){
         console.log(JSON.stringify(error));
       }).then(function(){
-        $state.go('home');
+        $state.go('dash');
       });
     };
 
