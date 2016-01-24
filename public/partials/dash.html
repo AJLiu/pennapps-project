@@ -70,4 +70,20 @@
     <h3>Looks like you haven't signed up for any competitions :(</h3>
   </div>
 	<h2>Here are some suggestions</h2>
+  <div ng-repeat="competition in suggestedCompetitions" class="col-xs-12 col-sm-6 col-md-3">
+    <div class = "panel panel-default" >
+      <div class = "panel-heading">
+        <a href="#/competitions/{{competition._id}}">{{competition.name}}</a>
+      </div>
+      <div class = "panel-body">
+        {{competition.prompt}}
+        <div class="center-cropped" 
+        style="background-image: url({{competition.image}});">
+          <img src="{{competition.image}}" />
+        </div>
+        <h5><font color = "blue">Starting/Started </font>{{competition.start_date}}</h5>
+      </div>
+    </div>
+  </div>
+
 </div>
