@@ -1,0 +1,20 @@
+
+<div class="container">
+    <h2>Current Competitions</h2>
+    <div class="row">
+    <div ng-repeat="competition in allCompetitions" class="col-xs-12 col-sm-6 col-md-3">
+    	<div class = "panel panel-default ">
+    		<div class = "panel-heading">
+      		<a href="#/competitions/{{competition._id}}">{{competition.name}}</a>
+      	</div>
+      	<div class = "panel-body">
+      		{{competition.prompt}}
+          <div class="center-cropped" 
+            style="background-image: url({{competition.image}});">
+            <img src="{{competition.image}}" />
+          </div>
+      		<h5><font color = "red">Ends: </font>{{competition.end_date}}<h5>
+      	</div>
+      </div>
+    </div>
+</div>

@@ -72,7 +72,17 @@ app.config([
         }
       }
     })
-
+    .state('browse', {
+      parent: 'index',
+      url: '/browse',
+      views: {
+        'main@index': {
+          templateUrl: 'partials/browse.html',
+          controller: 'BrowseCtrl'
+        }
+      }
+    })
+    
     .state('competition', {
       parent: 'index',
       url: '/competitions/{id}',
