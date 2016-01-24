@@ -13,6 +13,9 @@ var School = mongoose.model('School');
 var Submission = mongoose.model('Submission');
 var User = mongoose.model('User');
 
+
+
+
 router.post('/register', function(req, res, next) {
     if (!req.body.email || !req.body.password) {
         return res.status(400).json({

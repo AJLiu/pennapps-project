@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var CompetitionSchema = new Schema({
     name: {type: String, required: true},
+	description: {type: String, required: true},
     start_date: {type: Date, required: true},
     end_date: {type: Date, required: true},
     prompt: {type: String, required: true},

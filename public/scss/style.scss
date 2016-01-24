@@ -1,22 +1,30 @@
+$background: #90A4AE;
+$nav-background: rgba(245,245,245, .9);
+$form-background: #e7e7e7;
+$button-color: #29B6F6;
+$button-hover: #B3E5FC;
+
 html {
-    overflow-y: scroll;
+	overflow-y: scroll;
 	background-color: #424242;
 }
+
 body {
-    overflow: hidden;
+	overflow: hidden;
 	font-family: 'lato', sans-serif;
+	background-color: $background;
 }
 
 nav.navbar {
 	margin: 0;
-	position:fixed;
-	top:0;
+	position: fixed;
+	top: 0;
 	width: 100%;
-	background-color: rgba(245,245,245, .9);
-	z-index: 1
+	background-color: $nav-background;
+	z-index: 1;
 }
 
-div.heading{
+div.heading {
 	position: relative;
 	margin: 0;
 	width: 100%;
@@ -25,33 +33,40 @@ div.heading{
 	background-image: url(../assets/books_compress.jpg);
 	background-size: cover;
 
-	div.centerbox{
+	div.centerbox {
 		transform: translate(-50%,-50%);
 		top: 50%;
 		left: 50%;
-		position: absolute;;
+		position: absolute;
 		text-align: center;
 		color: white;
 		line-height: 2.5em;
+
 		h1 {
 			font-family: 'Dancing Script', cursive;
 			font-size: 10em;
 		}
+
 		h2 {
 			font-size: 2em;
 		}
-		a, a:visited, a:hover, a:link {
+
+		a,
+		a:visited,
+		a:hover,
+		a:link {
 			line-height: 0;
 			display: inline-block;
-			background-color:#29B6F6;
-			padding: 20px 20px;
+			background-color: $button-color;
+			padding: 20px;
 			font-size: 1.2em;
 			color: white;
 			text-decoration: none;
-			transition-duration: .5s;
-			border-radius: .5em;
+			transition-duration: 0.5s;
+			border-radius: 0.5em;
+
 			&:hover {
-				background-color: #B3E5FC;
+				background-color: $button-hover;
 				border-radius: 0;
 			}
 		}
@@ -64,8 +79,47 @@ div#about {
 	background-color: green;
 	margin: 0;
 	padding: 0;
+	box-shadow: 5px 5px 2px #424242;
+
 	h2 {
-		margin:0px;
+		margin: 0;
 		padding: 10px;
 	}
+}
+
+div.panel#login, div.panel#register {
+	align-items: center;
+	background-color:$form-background;
+	margin: auto;
+	width: 300px;
+	box-shadow: 5px 5px 10px #889;
+	margin-top: 60px;
+
+	.panel-heading {
+		margin-top: 10px;
+		background-color:$form-background;
+		line-height: 1em;
+		padding-bottom: 0;
+	}
+
+	.panel-body {
+		width: 100%;
+		background-color:$form-background;
+	}
+
+	button {
+		float: right;
+		background-color:$button-color;
+		border-color: $button-color;
+		transition-duration: .5s;
+		&:hover{
+			background-color:$button-hover;
+			border-color: $button-hover;
+			border-radius: 0;
+		}
+	}
+}
+
+div.panel#register {
+	width: 450px;
 }
