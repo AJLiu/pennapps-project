@@ -32,17 +32,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    Competition.find({
+    Competition.findOne({
         _id: req.param('id')
     }, function(err, doc) {
         if (err) {
             console.error(err);
             res.status(400).send(err);
         }
-        if(date < doc[i].start_date)
-            doc[i].prompt="Come back later";
-        else if(date > doc[i].end_date)
-            doc[i].prompt+="\nNOTE: THIS EVENT IS OVER.";
+        var date = new Date();
+        if(date < doc.start_date)
+            doc.prompt="Come back later";
+        else if(date > doc.end_date)
+            doc.prompt+="\nNOTE: THIS EVENT IS OVER.";
         res.json(doc);
     });
 });

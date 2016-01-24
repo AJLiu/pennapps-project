@@ -7,6 +7,7 @@ var CompetitionSchema = new Schema({
     start_date: {type: Date, required: true},
     end_date: {type: Date, required: true},
     prompt: {type: String, required: true},
+    image: {type: String, required: true},
     students: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     submissions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Submission'}]
 });

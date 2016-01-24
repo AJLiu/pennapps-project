@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    Submission.find({_id: req.param('id')}, function(err, user) {
+    Submission.findOne({_id: req.param('id')}, function(err, user) {
         if (err) {
             console.error(err);
             res.status(400).send(err);

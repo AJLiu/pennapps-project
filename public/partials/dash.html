@@ -3,27 +3,51 @@
   <div ng-hide="noCompetitions">
 
     <div ng-show="currentCompetitions">
-      <h3>Current</h3>
+      <h3>Current Competitions</h3>
       <div ng-repeat="competition in currentCompetitions">
-        <p>{{competition.name}}: {{competition.prompt}}</p>
+      	<div class = "panel panel-default panelorange">
+      		<div class = "panel-heading">
+        		<a href="#/competitions/{{competition._id}}">{{competition.name}}</a>
+        	</div>
+        	<div class = "panel-body">
+        		{{competition.prompt}}
+        		<h5>Ends: {{competition.end_date}}<h5>
+        	</div>
+        </div>
       </div>
     </div>
 
     <div ng-show="upcomingCompetitions">
-      <h3>Upcoming</h3>
+      <h3>Upcoming Competitions</h3>
+
       <div ng-repeat="competition in upcomingCompetitions">
-        <p>{{competition.name}}</p>
+      	<div class = "panel panel-default">
+        	<div class = "panel-heading">
+        		<a href="#/competitions/{{competition._id}}">{{competition.name}}</a>
+       		</div>
+       		<div class = "panel-body">
+       			{{competition.prompt}}
+       			<h5>Starts: {{competition.start_date}}</h5>
+       		</div>
+       	</div>
       </div>
     </div>
 
     <div ng-show="pastCompetitions">
-      <h3>Past</h3>
+      <h3>Past Competitions</h3>
       <div ng-repeat="competition in pastCompetitions">
-        <p>{{competition.name}}: {{competition.prompt}}</p>
+      	<div class = "panel panel-default">
+        	<div class = "panel-heading">
+        		<a href="#/competitions/{{competition._id}}">{{competition.name}}: {{competition.prompt}}</a>
+      		</div>
+      		<div class = "panel-body">
+      			<h5>Ended: {{competition.end_date}}</h5>
+      		</div>
+      	</div>
       </div>
     </div>
   </div>
-
+  <h3>Suggested for You</h3>
   <div ng-show="noCompetitions">
     <h3>Looks like you haven't signed up for any competitions :(</h3>
   </div>

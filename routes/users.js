@@ -71,7 +71,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    User.find({
+    User.findOne({
         _id: req.param('id')
     }, function(err, user) {
         if (err) {
@@ -150,6 +150,16 @@ router.param('id', function(req, res, next, id) {
 	}, function(error) {
 		res.status(400).send(error);
 	});
+});
+
+router.get('/:id/competitions', function(req, res, next) {
+  Competition.find({
+    _id: { $in: req.user.competitions }
+  }).then(function(competitions) {
+    res.send(competitions);
+  }, function(error) {
+    res.status(400).send(error);
+  });
 });
 
 router.get('/:id/competitions/current', function(req, res, next) {
