@@ -23,6 +23,13 @@ app.controller('TestCtrl', [
           students: [],
           submissions: []
         }, {
+          name: "Unregistered Hackathon",
+          start_date: new Date(2016, 0, 22, 0, 0, 0, 0),
+          end_date: new Date(2016, 0, 24, 23, 59, 59, 999),
+          prompt: "Make something awesome",
+          students: [],
+          submissions: []
+        }, {
           name: "Some Old Event",
           start_date: new Date(2015, 0, 22, 0, 0, 0, 0),
           end_date: new Date(2015, 0, 24, 23, 59, 59, 999),
@@ -37,6 +44,13 @@ app.controller('TestCtrl', [
           students: [],
           submissions: []
         }, {
+          name: "Unregistered Some Old Event",
+          start_date: new Date(2015, 0, 22, 0, 0, 0, 0),
+          end_date: new Date(2015, 0, 24, 23, 59, 59, 999),
+          prompt: "Make something awesome",
+          students: [],
+          submissions: []
+        }, {
           name: "Future Event",
           start_date: new Date(2017, 0, 22, 0, 0, 0, 0),
           end_date: new Date(2017, 0, 24, 23, 59, 59, 999),
@@ -44,7 +58,14 @@ app.controller('TestCtrl', [
           students: [],
           submissions: []
         }, {
-          name: "Future Event",
+          name: "Future Event 2",
+          start_date: new Date(2017, 0, 22, 0, 0, 0, 0),
+          end_date: new Date(2017, 0, 24, 23, 59, 59, 999),
+          prompt: "Make something awesome",
+          students: [],
+          submissions: []
+        }, {
+          name: 'Unregistered Future Event',
           start_date: new Date(2017, 0, 22, 0, 0, 0, 0),
           end_date: new Date(2017, 0, 24, 23, 59, 59, 999),
           prompt: "Make something awesome",
@@ -70,9 +91,13 @@ app.controller('TestCtrl', [
       $http.get('/competitions').then(function(response) {
         var competitions = response.data;
         var requests = competitions.map(function(competition) {
-          return $http.post('/competitions/'+competition._id+'/register', null, {
-            headers: {Authorization: 'Bearer '+auth.getToken()}
-          });
+          if (competition.name.indexOf('Unregistered') > -1) {
+            return Promise.resolve({data: 'skipped'});
+          } else {
+            return $http.post('/competitions/'+competition._id+'/register', null, {
+              headers: {Authorization: 'Bearer '+auth.getToken()}
+            });
+          }
         });
         Promise.all(requests).then(function(responses) {
           var data = responses.map(function(response) {
@@ -86,7 +111,7 @@ app.controller('TestCtrl', [
     };
 
     $scope.testWithdraw = function() {
-      $http.get('/competitions').then(function(response) {
+      $http.get('/users/'+auth.currentUserId()+'/competitions').then(function(response) {
         var competitions = response.data;
         var requests = competitions.map(function(competition) {
           return $http.post('/competitions/'+competition._id+'/withdraw', null, {
