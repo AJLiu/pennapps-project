@@ -3,23 +3,13 @@ app.controller('DashCtrl', [
   '$rootScope',
   '$state',
   'auth',
-  function($scope, $rootScope, $state, auth) {
+  '$http',
+  function($scope, $rootScope, $state, auth, $http) {
 
-    // $scope.register = function(){
-    //   auth.register($scope.user).error(function(error){
-    //     console.log(JSON.stringify(error));
-    //   }).then(function(){
-    //     //$state.go('home');
-    //   });
-    // };
 
-    // $scope.logIn = function(){
-    //   auth.logIn($scope.loginUser).error(function(error){
-    //     console.log(JSON.stringify(error));
-    //   }).then(function(){
-    //     //$state.go('home');
-    //   });
-    // };
+    $http.get('/users/'+auth.currentUserId()+'/livecompetitions').then(function(response) {
+      $scope.liveCompetitions = response.data;
+    });
 
   }
 ]);
