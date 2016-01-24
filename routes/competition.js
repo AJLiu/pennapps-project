@@ -13,6 +13,7 @@ var School = mongoose.model('School');
 var Submission = mongoose.model('Submission');
 var User = mongoose.model('User');
 
+
 router.get('/', function(req, res, next) {
 
 	Competition.find(function(err, doc) {
@@ -49,6 +50,24 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+
+    Competition.create({
+        name: req.body.name,
+        start_date: req.body.start_date,
+        end_date: req.body.end_date,
+        prompt: req.body.prompt,
+        students: req.body.students,
+        image: req.body.image,
+        submissions: req.body.submissions
+    }, function(err, doc) {
+        if (err) {
+            console.log(err);
+            res.status(400).send(err);
+        } else {
+            res.send(doc);
+        }
+    });
+
 	Competition.create({
 		name: req.body.name,
 		start_date: req.body.start_date,
@@ -66,6 +85,7 @@ router.post('/', function(req, res, next) {
 			res.send(doc);
 		}
 	});
+
 });
 
 router.delete('/:id', function(req, res, next) {
@@ -163,7 +183,7 @@ router.post('/:id/withdraw', auth, function(req, res, next) {
 	});
 });
 
-router.get('/current', function(req, res, next) {
+router.get('/type/current', function(req, res, next) {
 	var date = new Date();
 
 	Competition.find({
@@ -183,7 +203,7 @@ router.get('/current', function(req, res, next) {
 });
 
 
-router.get('/past', function(req, res, next) {
+router.get('/type/past', function(req, res, next) {
 	var date = new Date();
 
 	Competition.find({
@@ -195,14 +215,14 @@ router.get('/past', function(req, res, next) {
 			console.error(err);
 			res.status(400).send(err);
 		}
-		for (var i=0; i<competitions.length; i++) {
-	      competitions[i].prompt+="\nNOTE: THIS EVENT IS OVER.";
+		for (var i=0; i<doc.length; i++) {
+	      doc[i].prompt+="\nNOTE: THIS EVENT IS OVER.";
 	    }
 		res.json(doc);
 	});
 });
 
-router.get('/upcoming', function(req, res, next) {
+router.get('/type/upcoming', function(req, res, next) {
 	var date = new Date();
 
 	Competition.find({
@@ -214,8 +234,8 @@ router.get('/upcoming', function(req, res, next) {
 			console.error(err);
 			res.status(400).send(err);
 		}
-		for (var i = 0; i < competitions.length; i++) {
-			competitions[i].prompt = "Come back later";
+		for (var i = 0; i < doc.length; i++) {
+			doc[i].prompt = "Come back later";
 		}
 		res.json(doc);
 	});
