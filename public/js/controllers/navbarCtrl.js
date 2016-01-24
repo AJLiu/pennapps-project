@@ -6,7 +6,7 @@ app.controller('NavbarCtrl', [
   '$state',
   'auth',
   function($scope, $rootScope, utils, $http, $state, auth) {
-    $state.isLoggedIn = auth.isLoggedIn;
+    $scope.isLoggedIn = auth.isLoggedIn;
     auth.currentUser().then(function(user) {
       $scope.currentUser = user;
     }, function(error) {
