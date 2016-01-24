@@ -1,35 +1,62 @@
-html, body {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  padding: 0;
-  margin: 0;
+html {
+  overflow-y: scroll;
+  background-color: #424242; }
+
+body {
+  overflow: hidden;
   font-family: 'lato', sans-serif; }
 
-nav.ng-scope {
+nav.navbar {
+  margin: 0;
   position: fixed;
   top: 0;
   width: 100%;
   background-color: rgba(245, 245, 245, 0.9);
   z-index: 1; }
 
-div.header {
+div.heading {
   position: relative;
   margin: 0;
   width: 100%;
   height: 100%;
-  background-color: red;
+  background-color: white;
   background-image: url(../assets/books_compress.jpg);
   background-size: cover; }
-  div.header div.centerbox {
+  div.heading div.centerbox {
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    position: relative;
+    position: absolute;
     text-align: center;
-    color: white; }
-    div.header div.centerbox h1 {
+    color: white;
+    line-height: 2.5em; }
+    div.heading div.centerbox h1 {
       font-family: 'Dancing Script', cursive;
-      font-size: 8em; }
+      font-size: 10em; }
+    div.heading div.centerbox h2 {
+      font-size: 2em; }
+    div.heading div.centerbox a, div.heading div.centerbox a:visited, div.heading div.centerbox a:hover, div.heading div.centerbox a:link {
+      line-height: 0;
+      display: inline-block;
+      background-color: #29B6F6;
+      padding: 20px 20px;
+      font-size: 1.2em;
+      color: white;
+      text-decoration: none;
+      -webkit-transition-duration: .5s;
+              transition-duration: .5s;
+      border-radius: .5em; }
+      div.heading div.centerbox a:hover, div.heading div.centerbox a:visited:hover, div.heading div.centerbox a:hover:hover, div.heading div.centerbox a:link:hover {
+        background-color: #B3E5FC;
+        border-radius: 0; }
+
+div.about {
+  position: relative;
+  min-height: 50%;
+  background-color: green;
+  margin: 0;
+  padding: 0; }
+  div.about h2 {
+    margin: 0px;
+    padding: 10px; }
