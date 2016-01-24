@@ -61,15 +61,45 @@ img.bg {
   left: 0;
   right: 0;
   bottom: 0;
-  margin: auto;
+  margin: 0;
   min-width: 50%;
   min-height: 50%;
 }
-div.navbar{
+.navbar{
   background-color: transparent;
   color: rgb(0,0,0);
-  height: 20px;
+
+  margin-bottom: 0;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+/*}
+body {
+  margin: 0px;
 }
+#header h1{
+    margin:0px;
+}
+nav {
+  margin: 0;
+  padding: 0;
+
+}
+.navbar-collapse {
+  margin:0;
+  padding: 0;
+}
+div {
+  padding: 0;
+  margin: 0;
+}
+img {
+  padding: 0;
+}*/
+/*.navbar-collapse {
+  margin-bottom: 0;
+  padding-bottom: 1000px;
+}*/
 /*div.collapse navbar-collapse.img{
 
     max-height: 40px;
