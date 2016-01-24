@@ -202,6 +202,10 @@ app.controller('TestCtrl', [
       });
     };
 
+    $scope.submitSpam = function() {
+      
+    }
+
     $scope.test1 = $scope.testCreate;
     $scope.test2 = $scope.testRegister;
     $scope.test3 = $scope.testWithdraw;

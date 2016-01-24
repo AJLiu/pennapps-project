@@ -1,29 +1,35 @@
-<div style="height:100px">
-  <div class="row" style="padding-top:50px">
-    <div class="col-xs-6">
-      <button ng-click="voteLeft()">Vote Left!</button>
+<div ng-hide="waiting">
+  <div style="height:100px">
+    <div class="row" style="padding-top:50px">
+      <div class="col-xs-6">
+        <button ng-click="voteLeft()">Vote Left!</button>
+      </div>
+      <div class="col-xs-6">
+        <button ng-click="voteRight()">Vote Right!</button>
+      </div>
     </div>
-    <div class="col-xs-6">
-      <button ng-click="voteRight()">Vote Right!</button>
+  </div>
+
+  <div class="row">
+    <div id="left" class="col-xs-6">
+      <div>
+        <object type="text/html" data="http://ivonliu.com/misc/vandata/vandata.html" width="100%" height="420px" style="overflow:auto;border:1px ridge black">
+        </object>
+      </div>
     </div>
+    <div id="right" class="col-xs-6">
+      <div>
+        <object type="text/html" data="http://pennapps.com" width="100%" height="420px" style="overflow:auto;border:1px ridge black">
+        </object>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:100px">
+    <h3>3 more matches left in this round</h3>
   </div>
 </div>
 
-<div class="row">
-  <div id="left" class="col-xs-6">
-    <div>
-      <object type="text/html" data="http://ivonliu.com/misc/vandata/vandata.html" width="100%" height="420px" style="overflow:auto;border:1px ridge black">
-      </object>
-    </div>
-  </div>
-  <div id="right" class="col-xs-6">
-    <div>
-      <object type="text/html" data="http://pennapps.com" width="100%" height="420px" style="overflow:auto;border:1px ridge black">
-      </object>
-    </div>
-  </div>
-</div>
-
-<div style="height:100px">
-  <h3>3 more matches left in this round</h3>
+<div ng-show="waiting">
+  <h4 style="padding-top: 50px">Please wait. There are 2 more matches left in this round.</h4>
 </div>
