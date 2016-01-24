@@ -164,7 +164,7 @@ router.get('/:id/livecompetitions', function(req, res, next) {
 });
 
 router.get('/:id/pastcompetitions', function(req, res, next) {
-  Competition.find({ _id: { $in: req.user.pastcompetitions }}).then(function(competitions) {
+  Competition.find({ _id: { $in: req.user.past_competitions }}).then(function(competitions) {
     res.send(competitions);
   }, function(error) {
     res.status(400).send(error);

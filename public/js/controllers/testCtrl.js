@@ -23,7 +23,7 @@ app.controller('TestCtrl', [
     };
 
     $scope.testRegister = function() {
-      $http.post('/competitions/56a3d9aa7919977415c6e076/register', null, {
+      $http.post('/competitions/56a3d91f7919977415c6e075/register', null, {
         headers: {Authorization: 'Bearer '+auth.getToken()}
       }).then(function(response) {
         console.log(JSON.stringify(response.data));

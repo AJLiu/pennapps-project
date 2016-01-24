@@ -138,4 +138,52 @@ router.post('/:id/withdraw', auth, function(req, res, next) {
   });
 });
 
+router.post('/:id/archive', auth, function(req, res, next) {
+  User.findOne({_id: req.payload._id}).then(function(user) {
+    if (user.live_competitions.indexOf(req.competition._id) > -1) {
+      User.update(
+        {_id: req.payload._id},
+        {$pull: {live_competitions: req.competition._id}}
+      ).then(function() {
+        return User.update(
+          {_id: req.payload._id},
+          {$push: {past_competitions: req.competition._id}}
+        );
+      }).then(function() {
+        res.send('done');
+      }, function(error) {
+        res.status(400).send(error);
+      });
+    } else {
+      res.status(404).send('Competition not found');
+    }
+  }, function(error) {
+    res.status(400).send(error);
+  });
+});
+
+router.post('/:id/unarchive', auth, function(req, res, next) {
+  User.findOne({_id: req.payload._id}).then(function(user) {
+    if (user.past_competitions.indexOf(req.competition._id) > -1) {
+      User.update(
+        {_id: req.payload._id},
+        {$pull: {past_competitions: req.competition._id}}
+      ).then(function() {
+        return User.update(
+          {_id: req.payload._id},
+          {$push: {live_competitions: req.competition._id}}
+        );
+      }).then(function() {
+        res.send('done');
+      }, function(error) {
+        res.status(400).send(error);
+      });
+    } else {
+      res.status(404).send('Competition not found');
+    }
+  }, function(error) {
+    res.status(400).send(error);
+  });
+})
+
 module.exports = router;

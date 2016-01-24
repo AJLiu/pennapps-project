@@ -1,10 +1,24 @@
 <div class="container">
-  <div ng-show="liveCompetitions">
-    <div ng-repeat="lc in liveCompetitions">
-      <p>{{lc.name}}: {{lc.prompt}}</p>
+
+  <div ng-show="liveCompetitions || pastCompetitions">
+
+    <div ng-show="liveCompetitions">
+      <h3>Current</h3>
+      <div ng-repeat="lc in liveCompetitions">
+        <p>{{lc.name}}: {{lc.prompt}} | <a ng-click="archive(lc._id)">archive</a></p>
+      </div>
+    </div>
+
+    <div ng-show="pastCompetitions">
+      <h3>Past</h3>
+      <div ng-repeat="pc in pastCompetitions">
+        <p>{{pc.name}}: {{pc.prompt}} | <a ng-click="unarchive(pc._id)">unarchive</a></p>
+      </div>
     </div>
   </div>
-  <div ng-hide="liveCompetitions">
+
+  <div ng-hide="liveCompetitions || pastCompetitions">
     <h3>Looks like you haven't signed up for any competitions :(</h3>
   </div>
+
 </div>
