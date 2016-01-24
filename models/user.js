@@ -14,8 +14,7 @@ var UserSchema = new Schema({
 
     school: {type: mongoose.Schema.Types.ObjectId, ref: 'School'},
     // school: {type: mongoose.Schema.Types.ObjectId, ref: 'School', required: true}, // points to school
-    live_competitions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Competition'}], // points to competition
-    past_competitions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Competition'}]  // points to competition
+    competitions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Competition'}], // points to competition
 });
 
 UserSchema.methods.setPassword = function(password) {
