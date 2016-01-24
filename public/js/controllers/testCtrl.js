@@ -15,6 +15,7 @@ app.controller('TestCtrl', [
           prompt: "Make something awesome",
           students: [],
           image: "assets/clock.jpg",
+          description: "This is a description",
           submissions: []
         }, {
           name: "HackArizona",
@@ -23,6 +24,7 @@ app.controller('TestCtrl', [
           prompt: "Make something awesome",
           students: [],
           image: "assets/clock.jpg",
+          description: "This is a description",
           submissions: []
         }, {
           name: "Unregistered Hackathon",
@@ -30,6 +32,7 @@ app.controller('TestCtrl', [
           end_date: new Date(2016, 0, 24, 23, 59, 59, 999),
           prompt: "Make something awesome",
           image: "assets/clock.jpg",
+          description: "This is a description",
           students: [],
           submissions: []
         }, {
@@ -39,6 +42,7 @@ app.controller('TestCtrl', [
           prompt: "Make something awesome",
           students: [],
           image: "assets/clock.jpg",
+          description: "This is a description",
           submissions: []
         }, {
           name: "Some Old Event 2",
@@ -47,6 +51,7 @@ app.controller('TestCtrl', [
           prompt: "Make something awesome",
           students: [],
           image: "assets/clock.jpg",
+          description: "This is a description",
           submissions: []
         }, {
           name: "Unregistered Some Old Event",
@@ -55,6 +60,7 @@ app.controller('TestCtrl', [
           prompt: "Make something awesome",
           students: [],
           image: "assets/clock.jpg",
+          description: "This is a description",
           submissions: []
         }, {
           name: "Future Event",
@@ -63,12 +69,14 @@ app.controller('TestCtrl', [
           prompt: "Make something awesome",
           students: [],
           image: "assets/clock.jpg",
+          description: "This is a description",
           submissions: []
         }, {
           name: "Future Event 2",
           start_date: new Date(2017, 0, 22, 0, 0, 0, 0),
           end_date: new Date(2017, 0, 24, 23, 59, 59, 999),
           prompt: "Make something awesome",
+          description: "This is a description",
           students: [],
           image: "assets/clock.jpg",
           submissions: []
@@ -77,6 +85,7 @@ app.controller('TestCtrl', [
           start_date: new Date(2017, 0, 22, 0, 0, 0, 0),
           end_date: new Date(2017, 0, 24, 23, 59, 59, 999),
           prompt: "Make something awesome",
+          description: "This is a description",
           students: [],
           image: "assets/clock.jpg",
           submissions: []
