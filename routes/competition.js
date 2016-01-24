@@ -55,6 +55,7 @@ router.post('/', function(req, res, next) {
         end_date: req.body.end_date,
         prompt: req.body.prompt,
         students: req.body.students,
+        image: req.body.image,
         submissions: req.body.submissions
     }, function(err, doc) {
         if (err) {
