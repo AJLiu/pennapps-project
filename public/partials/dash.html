@@ -5,12 +5,13 @@
     <div ng-show="currentCompetitions">
       <h3>Current Competitions</h3>
       <div ng-repeat="competition in currentCompetitions">
-      	<div class = "panel panel-default">
+      	<div class = "panel panel-default panelorange">
       		<div class = "panel-heading">
         		<a href="#/competitions/{{competition._id}}">{{competition.name}}</a>
         	</div>
         	<div class = "panel-body">
         		{{competition.prompt}}
+        		<h5>Ends: {{competition.end_date}}<h5>
         	</div>
         </div>
       </div>
@@ -26,6 +27,7 @@
        		</div>
        		<div class = "panel-body">
        			{{competition.prompt}}
+       			<h5>Starts: {{competition.start_date}}</h5>
        		</div>
        	</div>
       </div>
@@ -39,6 +41,7 @@
         		<a href="#/competitions/{{competition._id}}">{{competition.name}}: {{competition.prompt}}</a>
       		</div>
       		<div class = "panel-body">
+      			<h5>Ended: {{competition.end_date}}</h5>
       		</div>
       	</div>
       </div>
