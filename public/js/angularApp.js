@@ -141,7 +141,12 @@ app.config([
 app.run(['$rootScope', '$state', 'auth',
   function ($rootScope, $state, auth) {
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-      if (toState.name !== 'home' && toState.name !== 'login' && toState.name !== 'register' && !auth.isLoggedIn()) {
+      if (toState.name !== 'home'
+      && toState.name !== 'login'
+      && toState.name !== 'register'
+      && toState.name !== 'jlogin'
+      && toState.name !== 'jvote'
+      && !auth.isLoggedIn()) {
         event.preventDefault();
         $state.go('login');
       }
@@ -246,7 +251,7 @@ app.factory('jauth', ['$http', '$window', function($http, $window) {
   auth.currentUser = function() {
     var id = auth.currentUserId();
     if (id) {
-      return $http.get('/users/'+id).then(function(response) {
+      return $http.get('/judges/'+id).then(function(response) {
         return response.data;
       });
     } else {
@@ -255,13 +260,13 @@ app.factory('jauth', ['$http', '$window', function($http, $window) {
   };
 
   auth.register = function(user){
-    return $http.post('/users/register', user).success(function(data){
+    return $http.post('/judges/register', user).success(function(data){
       auth.saveToken(data.token);
     });
   };
 
   auth.logIn = function(user){
-    return $http.post('/users/login', user).success(function(data){
+    return $http.post('/judges/login', user).success(function(data){
       auth.saveToken(data.token);
     });
   };

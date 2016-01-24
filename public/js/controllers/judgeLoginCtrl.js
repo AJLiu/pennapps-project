@@ -4,8 +4,14 @@ app.controller('JudgeLoginCtrl', [
 	'$state',
 	'jauth',
 	function($scope, $rootScope, $state, jauth) {
-		if (auth.isLoggedIn()) {
-			$state.go('dash');
-		}
+
+    $scope.logIn = function(){
+      jauth.logIn($scope.user).error(function(error){
+        console.log(JSON.stringify(error));
+      }).then(function(){
+        $state.go('jvote');
+      });
+    };
+
 	}
 ]);

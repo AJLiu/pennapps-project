@@ -50,7 +50,7 @@ router.post('/login', function(req, res, next) {
         });
     }
 
-    passport.authenticate('local', function(err, user, info) {
+    passport.authenticate('local.judge', function(err, user, info) {
   		if (err) { return next(err); }
 
   		if (user) {
