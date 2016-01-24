@@ -65,6 +65,22 @@ img.bg {
   min-width: 50%;
   min-height: 50%;
 }
+div.navbar{
+  background-color: transparent;
+  color: rgb(0,0,0);
+  height: 20px;
+}
+/*div.collapse navbar-collapse.img{
+
+    max-height: 40px;
+    max-width: 30%; 
+    overflow: visible;
+    padding-top: 0;
+    padding-bottom: 0; 
+
+}*/
+
+
 /*@media screen and (max-width: 1024px) {  Specific to this particular image
   img.bg {
     left: 50%;
