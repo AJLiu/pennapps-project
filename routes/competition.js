@@ -54,6 +54,7 @@ router.post('/', function(req, res, next) {
 		start_date: req.body.start_date,
 		end_date: req.body.end_date,
 		prompt: req.body.prompt,
+		description: req.body.description,
 		students: req.body.students,
 		submissions: req.body.submissions,
 		image: req.body.image
@@ -93,6 +94,8 @@ router.patch('/:id', function(req, res, next) {
 		update.submissions = req.body.submissions;
 	if (req.body.image)
 		update.image = req.body.image;
+	if (req.body.description)
+		update.description = req.body.description;
 
 	Competition.findOneAndUpdate({
 		_id: req.param('id')
