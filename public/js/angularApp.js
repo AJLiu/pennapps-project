@@ -109,7 +109,29 @@ app.config([
             controller: 'CompetitionUnregisteredCtrl'
           }
         }
-      });
+      })
+
+    .state('jlogin', {
+      parent: 'index',
+      url: '/jlogin',
+      views: {
+        'main@index': {
+          templateUrl: 'partials/jlogin.html',
+          controller: 'JudgeLoginCtrl'
+        }
+      }
+    })
+
+    .state('jvote', {
+      parent: 'index',
+      url: '/jvote',
+      views: {
+        'main@index': {
+          templateUrl: 'partials/jvote.html',
+          controller: 'JudgeVoteCtrl'
+        }
+      }
+    });
 
     //$locationProvider.html5Mode({ enabled: true, requireBase: false });
     $urlRouterProvider.otherwise('home');
@@ -184,6 +206,68 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
 
   auth.logOut = function(){
     $window.localStorage.removeItem('pennguin-token');
+  };
+
+  return auth;
+}]);
+
+app.factory('jauth', ['$http', '$window', function($http, $window) {
+  var auth = {};
+
+  auth.saveToken = function (token){
+    $window.localStorage['pennguin-judge-token'] = token;
+  };
+
+  auth.getToken = function (){
+    return $window.localStorage['pennguin-judge-token'];
+  }
+
+  auth.isLoggedIn = function(){
+    var token = auth.getToken();
+
+    if(token){
+      var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+      return payload.exp > Date.now() / 1000;
+    } else {
+      return false;
+    }
+  };
+
+  auth.currentUserId = function(){
+    if(auth.isLoggedIn()){
+      var token = auth.getToken();
+      var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+      return payload._id;
+    }
+  };
+
+  auth.currentUser = function() {
+    var id = auth.currentUserId();
+    if (id) {
+      return $http.get('/users/'+id).then(function(response) {
+        return response.data;
+      });
+    } else {
+      return Promise.reject('Not logged in');
+    }
+  };
+
+  auth.register = function(user){
+    return $http.post('/users/register', user).success(function(data){
+      auth.saveToken(data.token);
+    });
+  };
+
+  auth.logIn = function(user){
+    return $http.post('/users/login', user).success(function(data){
+      auth.saveToken(data.token);
+    });
+  };
+
+  auth.logOut = function(){
+    $window.localStorage.removeItem('pennguin-judge-token');
   };
 
   return auth;
