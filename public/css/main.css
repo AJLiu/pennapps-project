@@ -31,9 +31,14 @@ input {
   min-width: 200px;
   width: 200px;
 }
+div.panel-heading {
+  /*background-color: white;*/
+  background: white;
+}
 .panel-default {
     display: inline-block;
-    background: #ffffff;
+    /*background: #ffffff;*/
+    background: white;
     min-height: 200px;
     height: 300px;
     box-shadow:0px 0px 5px 5px #C9C9C9;
