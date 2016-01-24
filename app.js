@@ -12,6 +12,9 @@ require('./models/school');
 require('./models/user');
 require('./models/competition');
 require('./models/submission');
+require('./models/judge');
+require('./models/match');
+require('./models/round');
 require('./config/passport');
 
 var routes = require('./routes/index');
@@ -19,6 +22,9 @@ var users = require('./routes/users');
 var schools = require('./routes/school');
 var submissions = require('./routes/submission');
 var competitions = require('./routes/competition');
+var judges = require('./routes/judge');
+var rounds = require('./routes/round');
+var matches = require('./routes/match');
 
 var app = express();
 
@@ -41,6 +47,9 @@ app.use('/users', users);
 app.use('/schools', schools);
 app.use('/submissions', submissions);
 app.use('/competitions', competitions);
+app.use('/judges', judges);
+app.use('/rounds', rounds);
+app.use('matches', matches);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

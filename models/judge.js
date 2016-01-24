@@ -10,11 +10,8 @@ var JudgeSchema = Schema({
 	hash: String,
 	salt: String,
 
-	previousAssignment: String,
-	currentAssignment: String,
-	done: Boolean, //legacy?
-	voted: Boolean,
-	judged: [String]
+	previousMatches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Match'}],
+	currentMatches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Match'}]
 });
 
 UserSchema.methods.setPassword = function(password) {

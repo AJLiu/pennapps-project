@@ -3,13 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var RoundSchema = Schema({
-    submissions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Submission'}],
-    numJudges: Number,
-    numPeriods: Number,
-    currentPeriod: Number,
-    active: Boolean,
-    votes: [vote],
-    remaining: [String],
+  matches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Match'}],
 	competition: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'}
 });
 
